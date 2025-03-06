@@ -7,12 +7,19 @@ include '.includes/toast_notification.php';
     <div class="card">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4>Semua Postingan</h4>
+                <h4>Semua produk</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table id="datatable" class="table table-hover">
                         <thead>
+                            <tr class="text-center">
+                                <th width="50px">#</th>
+                                <th>Judul Post</th>
+                                <th>Penulis</th>
+                                <th>Kategori</th>
+                                <th width="150px">Pilihan</th>
+                            </tr>
                             <tr class="text-center">
                                 <th width="50px">#</th>
                                 <th>Judul Post</th>
