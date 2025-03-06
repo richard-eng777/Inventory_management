@@ -4,9 +4,9 @@ include("config.php");
 session_start();
 
 if(isset($_POST['simpan'])) {
-    $category_name = $_POST['category_name'];
+    $penyedia_name = $_POST['nama'];
 
-    $query = "INSERT INTO categories (category_name) VALUES ('$category_name')";
+    $query = "INSERT INTO penyedia (name) VALUES ('$penyedia_name')";
     $exec = mysqli_query($conn, $query);
 
     if ($exec) {
@@ -26,17 +26,17 @@ if(isset($_POST['simpan'])) {
 
 if (isset($_POST['delete'])) {
     $catID = $_POST['catID'];
-    $exec = mysqli_query($conn, "DELETE FROM categories WHERE category_id='$catID'");
+    $exec = mysqli_query($conn, "DELETE FROM penyedia WHERE penyedia_id='$catID'");
 
     if ($exec) {
         $_SESSION['notification'] = [
             'type' => 'primary',
-            'message' => 'Kategori berhasil di hapus !'
+            'message' => 'Penyedia berhasil di hapus !'
         ];
     } else {
         $_SESSION['notification'] = [
             'type' => 'danger',
-            'message' => 'Gagal menghapus kategori: ' . mysqli_error($conn)
+            'message' => 'Gagal menghapus penyedia: ' . mysqli_error($conn)
 
         ];
     }
@@ -45,20 +45,20 @@ if (isset($_POST['delete'])) {
 }
 if (isset($_POST['update'])) {
     $catID = $_POST['catID'];
-    $category_name = $_POST['category_name'];
+    $penyedia_name = $_POST['nama'];
 
-    $query = "UPDATE categories SET category_name = '$category_name' WHERE category_id='$catID'";
+    $query = "UPDATE penyedia SET nama = '$penyedia_name' WHERE penyedia_id='$catID'";
     $exec = mysqli_query($conn, $query);
 
     if ($exec) {
         $_SESSION['notification'] = [
             'type' => 'primary',
-            'message' => 'kategori berhasil di perbarui'
+            'message' => 'nama penyedia berhasil di perbarui'
         ];
     } else {
         $_SESSION['notification'] = [
             'type' => 'danger',
-            'message' => 'Gagal memperbarui kategori: ' . mysqli_error($conn)
+            'message' => 'Gagal memperbarui nama penyedia: ' . mysqli_error($conn)
         ];
     }
     header('Location: kategori.php');
