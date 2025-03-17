@@ -8,9 +8,9 @@ $query = "SELECT * FROM barang WHERE barang_id = $barangIdToEdit";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
-    $post = $result->fetch_assoc();
+    $barang = $result->fetch_assoc();
 } else {
-    echo "Post not found.";
+    echo "Barang not found.";
     exit();
 }
 ?>
