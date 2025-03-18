@@ -20,23 +20,17 @@ include '.includes/toast_notification.php';
                                 <th>Kategori</th>
                                 <th width="150px">Pilihan</th>
                             </tr>
-                            <tr class="text-center">
-                                <th width="50px">#</th>
-                                <th>Judul Post</th>
-                                <th>Penulis</th>
-                                <th>Kategori</th>
-                                <th width="150px">Pilihan</th>
-                            </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
 
                         <?php
                         $index = 1;
-                        $query = "SELECT posts.*, users.name as user_name,
-                        categories.category_name FROM posts
-                        INNER JOIN users ON posts.user_id = users.user_id
-                        LEFT JOIN categories ON posts.category_id = categories.category_id
-                        WHERE posts.user_id = $userId";
+                        $query = "SELECT pengiriman.*, barang.nama as user_nama,
+                        penyedia.nama as user_name, FROM pengiriman
+                        INNER JOIN barang ON pengiriman.barang_id = barang.barang_id
+                        LEFT JOIN penyedia ON pengiriman.penyedia_id = penyedia.penyedia_id
+                        WHERE pengiriman.user_name = $userId";
+                        
 
                         $exec = mysqli_query($conn, $query);
 
@@ -45,9 +39,9 @@ include '.includes/toast_notification.php';
 
                         <tr>
                             <td><?= $index++; ?></td>
-                            <td><?= $post['post_title']; ?></td>
-                            <td><?= $post['user_name']; ?></td>
-                            <td><?= $post['category_name']; ?></td>
+                            <td><?= $barang['user_name']; ?></td>
+                            <td><?= $barang['user_nama']; ?></td>
+                            <td><?= $barang['tanggal_pengiriman']; ?></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -55,12 +49,12 @@ include '.includes/toast_notification.php';
                                     </button>
 
                                     <div class="dropdown-menu">
-                                        <a href="edit_post.php?post_id=<?= $post['id_post']; ?>"class="dropdown-item">
+                                        <a href="edit_barang.php?id_barang=<?= $barang['barang_id']; ?>"class="dropdown-item">
                                             <i class="bx bx-edit-alt me-2"></i> Edit
                                         </a>
 
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal"
-                                        data-bs-target="#deletePost_<?= $post['id_post']; ?>">
+                                        data-bs-target="#deletePost_<?= $post['barang_id']; ?>">
                                             <i class="bx bx-trash me-2"></i> Delete 
                                         </a>
                                     </div>
