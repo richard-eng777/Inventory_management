@@ -47,7 +47,7 @@
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="posts.php" class="menu-link">
-            <div data-i18n="Basic Inputs">Tambah Barang</div>
+            <div data-i18n="Basic Inputs">Tambah Penyedia</div>
           </a>
         </li>
       </ul>
