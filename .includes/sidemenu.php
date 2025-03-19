@@ -25,6 +25,11 @@
         <i class="menu-icon tf-icons bx bx-detail"></i>
         <div data-i18n="Posts">Barang</div>
       </a>
+      <!-- Penyedia -->
+       <li class="menu-item">
+        <a href="penyedia.php" class="menu-link">
+          <div data-il8n="Posts">Penyedia</div>
+        </a>
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="posts.php" class="menu-link">
@@ -35,6 +40,7 @@
           <a href="kategori.php" class="menu-link">
             <div data-i18n="Input groups">Penyedia</div>
           </a>
+        </li>
         </li>
       </ul>
     </li>
