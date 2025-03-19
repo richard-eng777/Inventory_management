@@ -21,26 +21,34 @@
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Menu</span></li>
     <!-- Forms -->
     <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <a href="barang.php" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-detail"></i>
         <div data-i18n="Posts">Barang</div>
       </a>
       <!-- Penyedia -->
-       <li class="menu-item">
-        <a href="penyedia.php" class="menu-link">
-          <div data-il8n="Posts">Penyedia</div>
-        </a>
+    <li class="menu-item">
+      <a href="penyedia.php" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-detail"></i>
+        <div data-il8n="Posts">Penyedia</div>
+      </a>
+    <!-- Pengiriman -->
+    <li class="menu-item">
+      <a href="Pengiriman.php" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-detail"></i>
+        <div data-il8n="Posts">Pengiriman</div>
+      </a>
+      <!-- Sub Menu -->
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="posts.php" class="menu-link">
             <div data-i18n="Basic Inputs">Tambah Barang</div>
           </a>
         </li>
+      <ul class="menu-sub">
         <li class="menu-item">
-          <a href="kategori.php" class="menu-link">
-            <div data-i18n="Input groups">Penyedia</div>
+          <a href="posts.php" class="menu-link">
+            <div data-i18n="Basic Inputs">Tambah Barang</div>
           </a>
-        </li>
         </li>
       </ul>
     </li>
