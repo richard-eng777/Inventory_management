@@ -2,7 +2,7 @@
 <!-- Basic Input Groups - Modified Version -->
 <div class="col-md-6">
   <div class="card mb-4">
-    <h5 class="card-header">Basic Input Groups</h5>
+    <h5 class="card-header">Table Barang</h5>
     <div class="card-body demo-vertical-spacing demo-only-element">
     <div class="card mb-4">
   <div class="card-body">
