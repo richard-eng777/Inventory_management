@@ -12,22 +12,38 @@
             <div class="card-body">
                 <form action="proses.php" method="POST">
                     <div class="mb-3">
-                        <label class="form-label" for="basic-default-fullname">Full Name</label>
-                        <input type="text" class="form-control" id="basic-default-fullname" name="nama" placeholder="John Doe" required>
+                        <label class="form-label" for="basic-default-fullname">Id</label>
+                        <input type="text" class="form-control" id="basic-default-fullname" name="id" placeholder="Id Barang" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="basic-default-email">Email</label>
-                        <input type="email" class="form-control" id="basic-default-email" name="email" placeholder="john@example.com" required>
+                        <label class="form-label" for="basic-default-email">Nama</label>
+                        <input type="email" class="form-control" id="basic-default-email" name="barang" placeholder="Nama Barang" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="basic-default-phone">Phone No</label>
-                        <input type="text" class="form-control" id="basic-default-phone" name="phone" placeholder="123-456-7890">
+                        <label class="form-label" for="basic-default-phone">Kontak</label>
+                        <input type="text" class="form-control" id="basic-default-phone" name="kontak" placeholder="123-456-7890">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-default-message">Message</label>
-                        <textarea class="form-control" id="basic-default-message" name="message" placeholder="Your message here..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button type="submit" class="btn btn-primary" id="sendButton">
+  <span class="spinner-border spinner-border-sm me-2 d-none" id="loadingSpinner"></span>
+  <i class="bx bx-paper-plane me-1"></i>
+  <span id="buttonText">Send</span>
+</button>
+
+<script>
+document.getElementById('sendButton').addEventListener('click', function() {
+  this.disabled = true;
+  document.getElementById('loadingSpinner').classList.remove('d-none');
+  document.getElementById('buttonText').textContent = 'Sending...';
+  
+  // Simulasi proses pengiriman
+  setTimeout(function() {
+    alert('Data berhasil dikirim!');
+    document.getElementById('loadingSpinner').classList.add('d-none');
+    document.getElementById('buttonText').textContent = 'Send';
+    document.getElementById('sendButton').disabled = false;
+  }, 2000);
+});
+</script>
                 </form>
             </div>
         </div>
