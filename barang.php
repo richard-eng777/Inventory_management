@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
      
   </div>
 
-  <button type="submit" class="btn btn-primary" id="sendButton">
+  <button type="submit" class="btn btn-primary" name="simpan" id="sendButton">
   <span class="spinner-border spinner-border-sm me-2 d-none" id="loadingSpinner"></span>
   <i class="bx bx-paper-plane me-1"></i>
   <span id="buttonText">Send</span>
@@ -95,7 +95,7 @@ document.getElementById('sendButton').addEventListener('click', function() {
   
   // Simulasi proses pengiriman
   setTimeout(function() {
-    alert('Data berhasil dikirim!');
+    
     document.getElementById('loadingSpinner').classList.add('d-none');
     document.getElementById('buttonText').textContent = 'Send';
     document.getElementById('sendButton').disabled = false;
