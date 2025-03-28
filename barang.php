@@ -95,7 +95,6 @@ document.getElementById('sendButton').addEventListener('click', function() {
   
   // Simulasi proses pengiriman
   setTimeout(function() {
-    
     document.getElementById('loadingSpinner').classList.add('d-none');
     document.getElementById('buttonText').textContent = 'Send';
     document.getElementById('sendButton').disabled = false;

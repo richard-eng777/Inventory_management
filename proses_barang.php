@@ -29,7 +29,7 @@ if (isset($_POST['simpan'])) {
     } else {
         $_SESSION['notification'] = [
             'type' => 'danger',
-            'message' => 'Error adding barang: ' . $conn->error
+            'message' => 'Error dding barang: ' . $conn->error
         ];
     }
 }
