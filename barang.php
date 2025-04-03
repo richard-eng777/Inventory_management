@@ -1,6 +1,6 @@
-<?php include '.includes/header.php'; ?>
+<?php include (".includes/header.php"); ?>
 <!-- Basic Input Groups - Modified Version -->
-<div class="col-md-6">
+<div class="container-xxl flex-grow-1 container-p-y">
   <div class="card mb-4">
     <h5 class="card-header">Table Barang</h5>
     <div class="card-body demo-vertical-spacing demo-only-element">
@@ -105,4 +105,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<?php include '.includes/footer.php'; ?>
+<?php include (".includes/footer.php"); ?>

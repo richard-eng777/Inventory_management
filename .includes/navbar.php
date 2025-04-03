@@ -1,3 +1,8 @@
+<style>
+ h4 {
+  margin-top : 17px;
+ }
+</style>
 <!-- Navbar -->
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl
 navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
@@ -7,6 +12,7 @@ navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
     </a>
   </div>
   <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+    <H4>KELOMPOK 12</H4>
     <ul class="navbar-nav flex-row align-items-center ms-auto">
       <!-- User -->
       <li class="nav-item navbar-dropdown dropdown-user dropdown">
