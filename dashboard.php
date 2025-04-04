@@ -18,6 +18,7 @@ include '.includes/toast_notification.php';
                                 <th>Nama Barang</th>
                                 <th>Nama Penyedia</th>
                                 <th>Jumlah</th>
+                                <th>Harga</th>
                                 <th width="150px">Pilihan</th>
                             </tr>
                         </thead>
@@ -52,19 +53,19 @@ $exec = mysqli_query($conn, $query);
                                     </button>
 
                                     <div class="dropdown-menu">
-                                        <a href="edit_post.php?post_id=<?= $post['id_post']; ?>"class="dropdown-item">
+                                        <a href="edit_barang.php?post_id=<?= $post['pengiriman_id']; ?>"class="dropdown-item">
                                             <i class="bx bx-edit-alt me-2"></i> Edit
                                         </a>
 
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal"
-                                        data-bs-target="#deletePost_<?= $post['id_post']; ?>">
+                                        data-bs-target="#deletePost_<?= $post['pengiriman_id']; ?>">
                                             <i class="bx bx-trash me-2"></i> Delete 
                                         </a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        <div class="modal fade" id="deletePost_<?= $post['id_post']; ?>"tabindex="-1" aria-hidden="true">
+                        <div class="modal fade" id="deletePost_<?= $post['pengiriman_id']; ?>"tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -72,10 +73,10 @@ $exec = mysqli_query($conn, $query);
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="proses_post.php" method="POST">
+                                        <form action="proses_barang.php" method="POST">
                                             <div>
                                                 <p>Tindakan ini tidak bisa dibatalkan.</p>
-                                                <input type="hidden" name="postID" value="<?= $post['id_post']; ?>">
+                                                <input type="hidden" name="postID" value="<?= $post['pengiriman_id']; ?>">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>

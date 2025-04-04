@@ -15,7 +15,7 @@
           
           <!-- Nama Barang Input -->
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Nama Barang" name="nama_barang" required>
+            <input type="text" class="form-control" placeholder="Nama Barang" name="name" required>
             <span class="input-group-text"><i class="bx bx-user"></i></span>
           </div>
 
