@@ -12,12 +12,13 @@ if ($conn->connect_error) {
 // Mengecek apakah data sudah dikirim melalui form
 if (isset($_POST['simpan'])) {
     // Mengambil data dari form
+    $idbarang = $_POST['barang_id']
     $nama = $_POST['nama'];
     $jumlah = $_POST['jumlah'];
     $harga = $_POST['harga'];
 
     // Menyiapkan query untuk menyimpan data
-    $query = "INSERT INTO barang (nama, jumlah, harga) VALUES ('$nama', $jumlah, $harga)";
+    $query = "INSERT INTO barang (barang_id, nama, jumlah, harga) VALUES ('$idbarang', $nama, $jumlah, $harga)";
 
     // Mengeksekusi query
     if ($conn->query($query) === TRUE) {
