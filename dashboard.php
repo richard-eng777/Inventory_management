@@ -17,8 +17,8 @@ include '.includes/toast_notification.php';
                                 <th width="50px">#</th>
                                 <th>Nama Barang</th>
                                 <th>Nama Penyedia</th>
-                                <th>Jumlah</th>
                                 <th>Tanggal Pengiriman</th>
+                                <th>Jumlah</th>
                                 <th width="150px">Pilihan</th>
                             </tr>
                         </thead>
@@ -30,11 +30,12 @@ include '.includes/toast_notification.php';
 $index = 1;
 
 // Using prepared statement to prevent SQL injection
-$query = "SELECT pengiriman.*, penyedia.nama as nama_p, barang.name as nama_b, barang.jumlah as jbarang, barang.harga as bharga
-        FROM pengiriman
-        INNER JOIN barang ON pengiriman.barang_id = barang.barang_id
-        LEFT JOIN penyedia ON pengiriman.penyedia_id = penyedia.penyedia_id
-        WHERE pengiriman.barang_id = $userId"; // Using parameterized query
+$query = "SELECT pengiriman.*, barang.name AS nama_b, penyedia.nama AS nama_p
+          FROM pengiriman
+          INNER JOIN barang ON pengiriman.barang_id = barang.barang_id
+          INNER JOIN penyedia ON pengiriman.penyedia_id = penyedia.penyedia_id
+          ORDER BY pengiriman.tanggal_pengiriman DESC";
+
 
 $exec = mysqli_query($conn, $query);
 
@@ -45,8 +46,8 @@ $exec = mysqli_query($conn, $query);
                             <td><?= $index++; ?></td>
                             <td><?= $post['nama_b']; ?></td>
                             <td><?= $post['nama_p']; ?></td>
-                            <td><?= $post['jbarang']; ?></td>
-                            <td><?= $post['bharga']; ?></td>
+                            <td><?= $post['tanggal_pengiriman']; ?></td>
+                            <td><?= $post['jumlah_barang']; ?></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -54,7 +55,7 @@ $exec = mysqli_query($conn, $query);
                                     </button>
 
                                     <div class="dropdown-menu">
-                                        <a href="edit_barang.php?post_id=<?= $post['pengiriman_id']; ?>"class="dropdown-item">
+                                        <a href="edit_pengiriman.php?id_pengiriman=<?= $post['pengiriman_id']; ?>"class="dropdown-item">
                                             <i class="bx bx-edit-alt me-2"></i> Edit
                                         </a>
 
@@ -74,7 +75,7 @@ $exec = mysqli_query($conn, $query);
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="proses_barang.php" method="POST">
+                                        <form action="proses_pengiriman.php" method="POST">
                                             <div>
                                                 <p>Tindakan ini tidak bisa dibatalkan.</p>
                                                 <input type="hidden" name="postID" value="<?= $post['pengiriman_id']; ?>">

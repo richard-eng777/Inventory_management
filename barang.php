@@ -78,6 +78,11 @@
                     <li><a class="dropdown-item" href="#" data-value="3">3</a></li>
                     <li><a class="dropdown-item" href="#" data-value="4">4</a></li>
                     <li><a class="dropdown-item" href="#" data-value="5">5</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="6">6</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="7">7</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="8">8</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="9">9</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="10">10</a></li>
                   </ul>
                 </div>
               </div>

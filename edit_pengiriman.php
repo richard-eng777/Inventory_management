@@ -2,9 +2,9 @@
 include 'config.php';
 include '.includes/header.php';
 
-$postIdToEdit = $_GET['id_barang'];
+$postIdToEdit = $_GET['id_pengiriman'];
 
-$query = "SELECT * FROM barang WHERE barang_id = $postIdToEdit";
+$query = "SELECT * FROM pengiriman WHERE pengiriman_id = $postIdToEdit";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
@@ -16,22 +16,33 @@ if ($result->num_rows > 0) {
 ?>
 <div class="container-xxl flex-grow-1 container-p-y">
   <div class="card mb-4">
-    <h5 class="card-header">Table Barang</h5>
+    <h5 class="card-header">Table Pengiriman</h5>
     <div class="card-body demo-vertical-spacing demo-only-element">
-    <form method="POST" action="proses_barang.php">
+    <form method="POST" action="proses_pengiriman.php">
 
 
       <div class="card mb-4">
         <div class="card-body">
-        <input type="hidden" name="id_barang" value="<?php echo $postIdToEdit; ?>">
+        <input type="hidden" name="id_pengiriman" value="<?php echo $postIdToEdit; ?>">
 
 
-          <div class="input-group mb-3">
-            <label for="name" class="form-label"></label>
-            <input type="text" class="form-control" placeholder="Nama Barang" id="name" name="name" 
-             value="<?php echo $post['name']; ?>" required>
-            <span class="input-group-text"><i class="bx bx-barcode"></i></span>
-          </div>
+        <div class="input-group mb-3">
+                            <label for="barang_id" class="form-label"></label>
+                            <select class="form-select" placeholder="Nama Barang" id="barang_id" name="barang_id" required>
+                                <option value="" selected disabled>Pilih salah satu</option>
+
+                                <?php
+                                $queryBarang = "SELECT * FROM barang";
+                                $resultBarang = $conn->query($queryBarang);
+                                if ($resultBarang->num_rows > 0) {
+                                    while($row = $resultBarang->fetch_assoc()) {
+                                        $selected = ($row["barang_id"] == $post['barang_id']) ? "selected" : "";
+                                        echo "<option value='" . $row["barang_id"] . "' $selected>" . $row["name"] . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                       </div>
           
         
           <div class="input-group mb-3">
@@ -50,24 +61,24 @@ if ($result->num_rows > 0) {
                                 }
                                 ?>
                             </select>
-                       </div>
-        
-          <div class="input-group mb-3">
-            <span class="input-group-text">Rp</span>
-            <input
-              label="harga"
-              id="harga"
-              type="text"
-              class="form-control"
-              placeholder="Harga"
-              aria-label="Amount (rupiah)"
-              name="harga"
-              value="<?php echo $post['harga']; ?>"
-              required
-            />
-            <span class="input-group-text">,00</span>
-          </div>
+            </div>
 
+
+            <div class="input-group mb-3">
+  <span class="input-group-text"><i class="bx bx-calendar">     Tanggal Pengiriman</i></span>
+  <input  
+    label="Tanggal Pengiriman"                 
+    type="date"
+    class="form-control"
+    id="tanggal_pengiriman"
+    name="tanggal_pengiriman"
+    value="<?php echo $post['tanggal_pengiriman']; ?>"
+    required
+  />
+</div>
+
+
+        
           
           <div class="col-md-6">
             <div class="card mb-4">
@@ -80,8 +91,8 @@ if ($result->num_rows > 0) {
                     class="form-control"
                     placeholder="Jumlah barang"
                     aria-label="Jumlah barang"
-                    id="jumlah"
-                    name="jumlah"
+                    id="jumlah_barang"
+                    name="jumlah_barang"
                     value="1"
                     readonly
                     required
@@ -120,7 +131,7 @@ if ($result->num_rows > 0) {
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const jumlahInput = document.getElementById('jumlah');
+  const jumlahInput = document.getElementById('jumlah_barang');
   const dropdownItems = document.querySelectorAll('.dropdown-item');
   
   dropdownItems.forEach(item => {

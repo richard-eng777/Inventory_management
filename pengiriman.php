@@ -2,26 +2,56 @@
 
 <div class="container-xxl flex-grow-1 container-p-y">
   <div class="card mb-4">
-    <h5 class="card-header">Pengiriman</h5>
+    <h5 class="card-header">Proses Pengiriman</h5>
     <div class="card-body demo-vertical-spacing demo-only-element">
      <div class="card-body">
-        <form action="proses.php" method="POST">
+        <form action="proses_pengiriman.php" method="POST">
+        <div class="mb-3">
+                            <label for="barang_id" class="form-label">Barang</label>
+                            <select class="form-select" placeholder="Nama Barang" name="barang_id" required>
+                                <option value="" selected disabled>Pilih salah satu</option>
+
+                                <?php
+                                $query = "SELECT * from barang";
+                                $result = $conn->query($query);
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        echo "<option value='" . $row["barang_id"] . "'>" . $row["name"] . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                       </div>
           <div class="mb-3">
-            <label class="form-label" for="basic-default-fullname">Pengiriman Id</label>
-            <input type="text" class="form-control" id="basic-default-fullname" name="id" placeholder="Id Pengiriman" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="basic-default-email">Barang Id</label>
-            <input type="email" class="form-control" id="basic-default-email" name="barang" placeholder="Id Barang" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="basic-default-phone">Penyedia Id</label>
-            <input type="text" class="form-control" id="basic-default-phone" name="kontak" placeholder="Id Penyedia">
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="basic-default-phone">Tanggal Pengiriman</label>
-            <input type="text" class="form-control" id="basic-default-phone" name="kontak" placeholder="22-2-2222">
-          </div>
+                            <label for="penyedia_id" class="form-label">Penyedia</label>
+                            <select class="form-select" placeholder="Nama Penyedia" name="penyedia_id" required>
+                                <option value="" selected disabled>Pilih salah satu</option>
+
+                                <?php
+                                $query = "SELECT * FROM penyedia";
+                                $result = $conn->query($query);
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        echo "<option value='" . $row["penyedia_id"] . "'>" . $row["nama"] . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                       </div>
+        
+  <div class="input-group mb-3">
+  <span class="input-group-text"><i class="bx bx-calendar">   Tanggal Pengiriman</i></span>
+  <input
+    type="date"
+    class="form-control"
+    id="tanggal_pengiriman"
+    name="tanggal_pengiriman"
+    required
+  />
+</div>
+
+
+
           <div class="col-md-6">
             <div class="card mb-4">
               <h5 class="card-header">Input Jumlah Barang</h5>
@@ -32,9 +62,11 @@
                   class="form-control"
                   placeholder="Jumlah barang"
                   aria-label="Jumlah barang"
-                  id="jumlahBarangInput"
+                  id="jumlah_barang"
                   value="1"
+                  name="jumlah_barang"
                   readonly
+                  required
                   >
                   <button
                   class="btn btn-outline-secondary dropdown-toggle"
@@ -50,15 +82,26 @@
                   <li><a class="dropdown-item" href="#" data-value="3">3</a></li>
                   <li><a class="dropdown-item" href="#" data-value="4">4</a></li>
                   <li><a class="dropdown-item" href="#" data-value="5">5</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="6">6</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="7">7</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="8">8</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="9">9</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="10">10</a></li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-
-                  <script>
+          <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
+        </div>  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+                   <script>
                          document.addEventListener('DOMContentLoaded', function() {
-                         const jumlahInput = document.getElementById('jumlahBarangInput');
+                         const jumlahInput = document.getElementById('jumlah_barang');
                          const dropdownItems = document.querySelectorAll('.dropdown-item');
   
                          dropdownItems.forEach(item => {
@@ -70,34 +113,5 @@
                     });
                  </script>
 
-     
-        </div>
-                   
-                    <button type="submit" class="btn btn-primary" id="sendButton">
-                    <span class="spinner-border spinner-border-sm me-2 d-none" id="loadingSpinner"></span>
-                    <i class="bx bx-paper-plane me-1"></i>
-                    <span id="buttonText">Send</span>
-                    </button>
-
-                <script>
-                    document.getElementById('sendButton').addEventListener('click', function() {
-                    this.disabled = true;
-                    document.getElementById('loadingSpinner').classList.remove('d-none');
-                    document.getElementById('buttonText').textContent = 'Sending...';
-  
- 
-                    setTimeout(function() {
-                     alert('Data berhasil dikirim!');
-                     document.getElementById('loadingSpinner').classList.add('d-none');
-                     document.getElementById('buttonText').textContent = 'Send';
-                     document.getElementById('sendButton').disabled = false;
-                   }, 2000);
-                  });
-                </script>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <?php include (".includes/footer.php"); ?>
