@@ -6,10 +6,10 @@ session_start();
 $userId = $_SESSION["user_id"];
 
 if (isset($_POST['simpan'])) {
-    $namabarang = $_POST["name"];
-    $penyediaid = $_POST["penyedia_id"];
-    $jumlahbarang = $_POST["jumlah"];
-    $hargabarang = $_POST["harga"];
+    // Mengambil data dari form
+    $nama = $_POST['nama'];
+    $jumlah = $_POST['jumlah'];
+    $harga = $_POST['harga'];
 
     $query = "INSERT INTO barang (`name`, penyedia_id, jumlah, harga) values ('$namabarang', '$penyediaid', '$jumlahbarang', '$hargabarang')";
    
