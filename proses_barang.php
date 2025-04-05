@@ -6,32 +6,29 @@ session_start();
 $userId = $_SESSION["user_id"];
 
 if (isset($_POST['simpan'])) {
-    $namabarang = $_POST["nama"];
-    $namapenyedia = $_POST["nama"];
+    $namabarang = $_POST["name"];
     $penyediaid = $_POST["penyedia_id"];
+    $jumlahbarang = $_POST["jumlah"];
+    $hargabarang = $_POST["harga"];
 
-        $query = "INSERT INTO barang (nama, nama, penyedia_id) values ('$namabarang', '$namapenyedia', '$penyediaid')";
-        if ($conn->query($query) === TRUE) {
-            $_SESSION['notification'] = [
-                'type' => 'primary',
-                'message' => 'Post Succesfully added.'
+    $query = "INSERT INTO barang (`name`, penyedia_id, jumlah, harga) values ('$namabarang', '$penyediaid', '$jumlahbarang', '$hargabarang')";
+    $exec = mysqli_query($conn, $query);
 
-            ];
-        } else {
-            $_SESSION['notification'] = [
-                'type' => 'danger',
-                'message' => 'Error adding post: ' . $conn->error 
-            ];
-        }
+    if ($conn->query($query) === TRUE) {
+        $_SESSION['notification'] = [
+            'type' => 'primary',
+            'message' => 'Post Succesfully added.'
 
+        ];
     } else {
         $_SESSION['notification'] = [
             'type' => 'danger',
-            'message' => 'Failed to upload image.'
+            'message' => 'Error adding post: ' . $conn->error 
         ];
     }
 
-    header('Location: dashboard.php');
+   
+    header('Location: table.php');
     exit();
 }
 
@@ -43,63 +40,43 @@ if (isset($_POST['delete'])) {
     if ($exec) {
         $_SESSION['notification'] = [
             'type' => 'primary',
-            'message' => 'Post succesfully deleted.'
+            'message' => 'Items succesfully deleted.'
         ];
 
     } else {
         $_SESSION['notification'] = [
             'type' => 'danger',
-            'message' => 'Error deleting post: ' . mysqli_error($conn)
+            'message' => 'Error deleting items: ' . mysqli_error($conn)
         ];
     }
-    header('Location: dashboard.php');
+    header('Location: table.php');
     exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
-    $postId = $_POST['post_id'];
-    $postTitle = $_POST['post_title'];
-    $content = $_POST['content'];
-    $categoryId = $_POST['category_id'];
-    $imageDir = "$assets/img/uploads/";
+    $postId = $_POST['id_barang'];
+    $namabarang = $_POST['name'];
+    $penyediaid = $_POST['penyedia_id'];
+    $jumlahbarang = $_POST['jumlah'];
+    $hargabarang = $_POST['harga'];
+    
 
-    if (!empty($_FILES["image_path"]["name"])) {
-        $imageName = $_FILES["image_path"]["name"];
-        $imagePath = $imageDir . $imageName;
-
-        move_uploaded_file($_FILES["image_path"]["tmp_name"], $imagePath);
-        
-        $queryOldImage = "SELECT image_path FROM posts WHERE id_post = $postId";
-        $resultOldImage = $conn->query($queryOldImage);
-        if ($resultOldImage->num_rows > 0) {
-            $oldImage = $resultOldImage->fetch_assoc()['image_path'];
-            if (file_exists($oldImage)) {
-                unlink($oldImage);
-            }
-        }
-    } else {
-        $imagePathQuery = "SELECT image_path FROM posts WHERE id_post = $postId";
-        $result = $conn->query($imagePathQuery);
-        $imagePath = ($result->num_rows > 0) ? $result->fetch_assoc()
-        ['imagePath'] : null;
-    }
-
-    $queryUpdate = "UPDATE posts SET post_title = '$postTitle',
-    content = '$content', category_id = $categoryId, image_path = '$imagePath'
-    WHERE id_post = $postId";
+    $queryUpdate = "UPDATE barang SET `name` = '$namabarang',
+    penyedia_id = '$penyediaid', jumlah = $jumlahbarang, harga = '$hargabarang'
+    WHERE barang_id = $postId";
 
     if ($conn->query($queryUpdate) === TRUE) {
         $_SESSION['notification'] = [
             'type' => 'primary',
-            'message' => 'Postingan berhasil diperbarui.'        
+            'message' => 'Barang berhasil diperbarui.'        
         ];
     } else {
         $_SESSION['notification'] = [
             'type' => 'danger',
-            'message' => 'Gagal memperbarui postingan.'
+            'message' => 'Gagal memperbarui barang.'
         ];
     }
-    header('Location: dashboard.php');
+    header('Location: table.php');
     exit();
 }
 

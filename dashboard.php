@@ -18,7 +18,7 @@ include '.includes/toast_notification.php';
                                 <th>Nama Barang</th>
                                 <th>Nama Penyedia</th>
                                 <th>Jumlah</th>
-                                <th>Harga</th>
+                                <th>Tanggal Pengiriman</th>
                                 <th width="150px">Pilihan</th>
                             </tr>
                         </thead>
@@ -30,7 +30,7 @@ include '.includes/toast_notification.php';
 $index = 1;
 
 // Using prepared statement to prevent SQL injection
-$query = "SELECT pengiriman.*, penyedia.nama as nama_p, barang.nama as nama_b
+$query = "SELECT pengiriman.*, penyedia.nama as nama_p, barang.name as nama_b, barang.jumlah as jbarang, barang.harga as bharga
         FROM pengiriman
         INNER JOIN barang ON pengiriman.barang_id = barang.barang_id
         LEFT JOIN penyedia ON pengiriman.penyedia_id = penyedia.penyedia_id
@@ -45,7 +45,8 @@ $exec = mysqli_query($conn, $query);
                             <td><?= $index++; ?></td>
                             <td><?= $post['nama_b']; ?></td>
                             <td><?= $post['nama_p']; ?></td>
-                            <td><?= $post['jumlah']; ?></td>
+                            <td><?= $post['jbarang']; ?></td>
+                            <td><?= $post['bharga']; ?></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
