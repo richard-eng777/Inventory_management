@@ -12,18 +12,17 @@ if (isset($_POST['simpan'])) {
     $hargabarang = $_POST["harga"];
 
     $query = "INSERT INTO barang (`name`, penyedia_id, jumlah, harga) values ('$namabarang', '$penyediaid', '$jumlahbarang', '$hargabarang')";
-    $exec = mysqli_query($conn, $query);
-
+   
     if ($conn->query($query) === TRUE) {
         $_SESSION['notification'] = [
             'type' => 'primary',
-            'message' => 'Post Succesfully added.'
+            'message' => 'Items Succesfully added.'
 
         ];
     } else {
         $_SESSION['notification'] = [
             'type' => 'danger',
-            'message' => 'Error adding post: ' . $conn->error 
+            'message' => 'Error adding items: ' . $conn->error 
         ];
     }
 
