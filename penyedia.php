@@ -1,53 +1,146 @@
-<?php include '.includes/header.php'; ?>
+<?php
+include '.includes/header.php';
+include '.includes/toast_notification.php';
+?>
 
-<h4 class="fw-bold py-3 mb-4">Table Penyedia</h4>
+<div class = "container-xxl flex-grow-1 container-p-y">
+    <div class = "card">
+        <div class = "card-header d-flex justify-content-between align-items-center">
+            <h4>Data Penyedia</h4>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory">
+                Tambah Penyedia
+            </button>
+        </div>
 
-<div class="row">
-    <div class="col-xl">
-        <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Proses Penyedia</h5>
-                <small class="text-muted float-end">Penyedia</small>
-            </div>
-            <div class="card-body">
-                <form action="proses.php" method="POST">
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-default-fullname">Id</label>
-                        <input type="text" class="form-control" id="basic-default-fullname" name="id" placeholder="Id Barang" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-default-email">Nama</label>
-                        <input type="email" class="form-control" id="basic-default-email" name="barang" placeholder="Nama Barang" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-default-phone">Kontak</label>
-                        <input type="text" class="form-control" id="basic-default-phone" name="kontak" placeholder="123-456-7890">
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="sendButton">
-  <span class="spinner-border spinner-border-sm me-2 d-none" id="loadingSpinner"></span>
-  <i class="bx bx-paper-plane me-1"></i>
-  <span id="buttonText">Send</span>
-</button>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table id="datatable" class="table table-hover">
+                    <thead>
+                        <tr class="text-center">
+                            <th width="50px">#</th>
+                            <th>Nama Penyedia</th>
+                            <th>Kontak</th>
+                            <th width="150px">Pilihan</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <?php
+                        $index = 1;
+                        $query = "SELECT * FROM penyedia";
+                        $exec = mysqli_query($conn, $query);
+                        while ($category = mysqli_fetch_assoc($exec)) :
+                        ?>
+                        <tr>
+                            <td><?= $index++; ?></td>
+                            <td><?= $category['nama']; ?></td>
+                            <td><?= $category['kontak']; ?></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#editCategory_<?= $category['penyedia_id']; ?>">
+                                        <i class="bx bx-edit-alt me-2"></i> Edit </a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#deleteCategory_<?= $category['penyedia_id']; ?>">
+                                        <i class="bx bx-trash me-2"></i> Delete </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- modal untuk hapus data kategory -->
+                        <div class="modal fade" id="deleteCategory_<?= $category['penyedia_id'];
+                        ?>" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Hapus Penyedia?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal">
 
-<script>
-document.getElementById('sendButton').addEventListener('click', function() {
-  this.disabled = true;
-  document.getElementById('loadingSpinner').classList.remove('d-none');
-  document.getElementById('buttonText').textContent = 'Sending...';
-  
-  // Simulasi proses pengiriman
-  setTimeout(function() {
-    alert('Data berhasil dikirim!');
-    document.getElementById('loadingSpinner').classList.add('d-none');
-    document.getElementById('buttonText').textContent = 'Send';
-    document.getElementById('sendButton').disabled = false;
-  }, 2000);
-});
-</script>
-                </form>
+                        </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="proses_penyedia.php" method="POST">
+                                        <div>
+                                            <p>Tindakan ini tidak bisa di batalkan.</p>
+                                            <input type="hidden" name="catID" value="<?= $category['penyedia_id']; ?>">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                            data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" name="delete" class="btn btn-primary">Hapus</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal untuk update data kategori -->
+                    <div id="editCategory_<?= $category['penyedia_id']; ?>" class="modal fade" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Update Data Kategori</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="proses_penyedia.php" method="POST">
+                                        <input type="hidden" name="catID" value="<?= $category['penyedia_id']; ?>">
+                                        <div class="form-group">
+                                            <label>Nama Kategori</label>
+                                            <input type="text" value="" name="nama" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Kontak</label>
+                                            <input type="text" value="" name="kontak" class="form-control">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" name="update" class="btn btn-warning">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                        <?php endwhile; ?>
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
-
 <?php include '.includes/footer.php'; ?>
+<!-- modal untuk tambah data kategori -->
+ <div class="modal fade" id="addCategory" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Tambah Penyedia </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action="proses_penyedia.php" method="POST">
+                    <div>
+                        <label for="namaKategori" class="form-label">Nama Penyedia</label>
+                        <input type="text" class="form-control" name="nama" required/>
+                    </div>
+                    <div>
+                        <label for="namaKategori" class="form-label">Kontak</label>
+                        <input type="text" class="form-control" name="kontak" required/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>      
+</div>

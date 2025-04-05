@@ -2,37 +2,86 @@
 include 'config.php';
 
 session_start();
-$userId = $_SESSION['user_id'];
 
-// Mengecek koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+$userId = $_SESSION["user_id"];
 
-// Mengecek apakah data sudah dikirim melalui form
 if (isset($_POST['simpan'])) {
     // Mengambil data dari form
-    $idbarang = $_POST['barang_id']
     $nama = $_POST['nama'];
     $jumlah = $_POST['jumlah'];
     $harga = $_POST['harga'];
 
     // Menyiapkan query untuk menyimpan data
-    $query = "INSERT INTO barang (barang_id, nama, jumlah, harga) VALUES ('$idbarang', $nama, $jumlah, $harga)";
+    $query = "INSERT INTO barang (nama, jumlah, harga) VALUES ('$nama', $jumlah, $harga)";
 
     // Mengeksekusi query
     if ($conn->query($query) === TRUE) {
-
         $_SESSION['notification'] = [
             'type' => 'primary',
-            'message' => 'Barang succesfully added.'
+            'message' => 'Post Succesfully added.'
+
         ];
     } else {
         $_SESSION['notification'] = [
             'type' => 'danger',
-            'message' => 'Error dding barang: ' . $conn->error
+            'message' => 'Error adding post: ' . $conn->error 
         ];
     }
+
+   
+    header('Location: table.php');
+    exit();
 }
 
-?>
+if (isset($_POST['delete'])) {
+    $postID = $_POST['postID'];
+
+    $exec = mysqli_query($conn, "DELETE FROM barang WHERE barang_id='$postID'");
+
+    if ($exec) {
+        $_SESSION['notification'] = [
+            'type' => 'primary',
+            'message' => 'Items succesfully deleted.'
+        ];
+
+    } else {
+        $_SESSION['notification'] = [
+            'type' => 'danger',
+            'message' => 'Error deleting items: ' . mysqli_error($conn)
+        ];
+    }
+    header('Location: table.php');
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+    $postId = $_POST['id_barang'];
+    $namabarang = $_POST['name'];
+    $penyediaid = $_POST['penyedia_id'];
+    $jumlahbarang = $_POST['jumlah'];
+    $hargabarang = $_POST['harga'];
+    
+
+    $queryUpdate = "UPDATE barang SET `name` = '$namabarang',
+    penyedia_id = '$penyediaid', jumlah = $jumlahbarang, harga = '$hargabarang'
+    WHERE barang_id = $postId";
+
+    if ($conn->query($queryUpdate) === TRUE) {
+        $_SESSION['notification'] = [
+            'type' => 'primary',
+            'message' => 'Barang berhasil diperbarui.'        
+        ];
+    } else {
+        $_SESSION['notification'] = [
+            'type' => 'danger',
+            'message' => 'Gagal memperbarui barang.'
+        ];
+    }
+    header('Location: table.php');
+    exit();
+}
+
+
+    
+
+

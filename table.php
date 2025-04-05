@@ -18,7 +18,7 @@ include '.includes/toast_notification.php';
                                 <th>Nama Barang</th>
                                 <th>Nama Penyedia</th>
                                 <th>Jumlah</th>
-                                <th>Tanggal Pengiriman</th>
+                                <th>Harga</th>
                                 <th width="150px">Pilihan</th>
                             </tr>
                         </thead>
@@ -30,12 +30,17 @@ include '.includes/toast_notification.php';
 $index = 1;
 
 // Using prepared statement to prevent SQL injection
-$query = "SELECT pengiriman.*, penyedia.nama as nama_p, barang.name as nama_b, barang.jumlah as jbarang, barang.harga as bharga
-        FROM pengiriman
-        INNER JOIN barang ON pengiriman.barang_id = barang.barang_id
-        LEFT JOIN penyedia ON pengiriman.penyedia_id = penyedia.penyedia_id
-        WHERE pengiriman.barang_id = $userId"; // Using parameterized query
-
+$query = "SELECT 
+barang.barang_id, 
+barang.name AS nama_b, 
+barang.jumlah, 
+barang.harga,
+penyedia.nama AS nama_p
+FROM barang
+INNER JOIN penyedia 
+ON barang.penyedia_id = penyedia.penyedia_id
+";
+       
 $exec = mysqli_query($conn, $query);
 
                         while ($post = mysqli_fetch_assoc($exec)) :
@@ -45,8 +50,8 @@ $exec = mysqli_query($conn, $query);
                             <td><?= $index++; ?></td>
                             <td><?= $post['nama_b']; ?></td>
                             <td><?= $post['nama_p']; ?></td>
-                            <td><?= $post['jbarang']; ?></td>
-                            <td><?= $post['bharga']; ?></td>
+                            <td><?= $post['jumlah']; ?></td>
+                            <td><?= $post['harga']; ?></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -54,19 +59,19 @@ $exec = mysqli_query($conn, $query);
                                     </button>
 
                                     <div class="dropdown-menu">
-                                        <a href="edit_barang.php?post_id=<?= $post['pengiriman_id']; ?>"class="dropdown-item">
+                                        <a href="edit_barang.php?id_barang=<?= $post['barang_id']; ?>"class="dropdown-item">
                                             <i class="bx bx-edit-alt me-2"></i> Edit
                                         </a>
 
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal"
-                                        data-bs-target="#deletePost_<?= $post['pengiriman_id']; ?>">
+                                        data-bs-target="#deletePost_<?= $post['barang_id']; ?>">
                                             <i class="bx bx-trash me-2"></i> Delete 
                                         </a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        <div class="modal fade" id="deletePost_<?= $post['pengiriman_id']; ?>"tabindex="-1" aria-hidden="true">
+                        <div class="modal fade" id="deletePost_<?= $post['barang_id']; ?>"tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -77,7 +82,7 @@ $exec = mysqli_query($conn, $query);
                                         <form action="proses_barang.php" method="POST">
                                             <div>
                                                 <p>Tindakan ini tidak bisa dibatalkan.</p>
-                                                <input type="hidden" name="postID" value="<?= $post['pengiriman_id']; ?>">
+                                                <input type="hidden" name="postID" value="<?= $post['barang_id']; ?>">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
