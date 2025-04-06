@@ -35,22 +35,22 @@ if ($result->num_rows > 0) {
           
         
           <div class="input-group mb-3">
-                            <label for="penyedia_id" class="form-label"></label>
-                            <select class="form-select" placeholder="Nama Penyedia" id="penyedia_id" name="penyedia_id" required>
-                                <option value="" selected disabled>Pilih salah satu</option>
+            <label for="penyedia_id" class="form-label"></label>
+            <select class="form-select" placeholder="Nama Penyedia" id="penyedia_id" name="penyedia_id" required>
+            <option value="" selected disabled>Pilih salah satu</option>
 
-                                <?php
-                                $queryPenyedia = "SELECT * FROM penyedia";
-                                $resultPenyedia = $conn->query($queryPenyedia);
-                                if ($resultPenyedia->num_rows > 0) {
-                                    while($row = $resultPenyedia->fetch_assoc()) {
-                                        $selected = ($row["penyedia_id"] == $post['penyedia_id']) ? "selected" : "";
-                                        echo "<option value='" . $row["penyedia_id"] . "' $selected>" . $row["nama"] . "</option>";
-                                    }
-                                }
-                                ?>
-                            </select>
-                       </div>
+            <?php
+            $queryPenyedia = "SELECT * FROM penyedia";
+            $resultPenyedia = $conn->query($queryPenyedia);
+            if ($resultPenyedia->num_rows > 0) {
+              while($row = $resultPenyedia->fetch_assoc()) {
+                $selected = ($row["penyedia_id"] == $post['penyedia_id']) ? "selected" : "";
+                echo "<option value='" . $row["penyedia_id"] . "' $selected>" . $row["nama"] . "</option>";
+              }
+            }
+            ?>
+            </select>
+          </div>
         
           <div class="input-group mb-3">
             <span class="input-group-text">Rp</span>
@@ -82,7 +82,7 @@ if ($result->num_rows > 0) {
                     aria-label="Jumlah barang"
                     id="jumlah"
                     name="jumlah"
-                    value="1"
+                    value="<?php echo $post['jumlah']; ?>"
                     readonly
                     required
                   >
@@ -99,7 +99,6 @@ if ($result->num_rows > 0) {
                     <li><a class="dropdown-item" href="#" data-value="2">2</a></li>
                     <li><a class="dropdown-item" href="#" data-value="3">3</a></li>
                     <li><a class="dropdown-item" href="#" data-value="4">4</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="5">5</a></li>
                     <li><a class="dropdown-item" href="#" data-value="5">5</a></li>
                     <li><a class="dropdown-item" href="#" data-value="6">6</a></li>
                     <li><a class="dropdown-item" href="#" data-value="7">7</a></li>

@@ -60,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $jumlahbarang = $_POST['jumlah'];
     $hargabarang = $_POST['harga'];
     
-
     $queryUpdate = "UPDATE barang SET `name` = '$namabarang',
     penyedia_id = '$penyediaid', jumlah = $jumlahbarang, harga = '$hargabarang'
     WHERE barang_id = $postId";

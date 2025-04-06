@@ -16,21 +16,21 @@
           
         
           <div class="input-group mb-3">
-                            <label for="penyedia_id" class="form-label"></label>
-                            <select class="form-select" placeholder="Nama Penyedia" name="penyedia_id" required>
-                                <option value="" selected disabled>Pilih salah satu</option>
+            <label for="penyedia_id" class="form-label"></label>
+            <select class="form-select" placeholder="Nama Penyedia" name="penyedia_id" required>
+            <option value="" selected disabled>Pilih salah satu</option>
 
-                                <?php
-                                $query = "SELECT * FROM penyedia";
-                                $result = $conn->query($query);
-                                if ($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "<option value='" . $row["penyedia_id"] . "'>" . $row["nama"] . "</option>";
-                                    }
-                                }
-                                ?>
-                            </select>
-                       </div>
+            <?php
+            $query = "SELECT * FROM penyedia";
+            $result = $conn->query($query);
+            if ($result->num_rows > 0) {
+              while($row = $result->fetch_assoc()) {
+                echo "<option value='" . $row["penyedia_id"] . "'>" . $row["nama"] . "</option>";
+              }
+            }
+            ?>
+            </select>
+          </div>
         
           <div class="input-group mb-3">
             <span class="input-group-text">Rp</span>

@@ -27,7 +27,6 @@ if (isset($_POST['simpan'])) {
         ];
     }
 
-   
     header('Location: dashboard.php');
     exit();
 }

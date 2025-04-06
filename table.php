@@ -26,22 +26,15 @@ include '.includes/toast_notification.php';
 
                        
                         <?php
-// Secure database query for dashboard
-$index = 1;
 
-// Using prepared statement to prevent SQL injection
-$query = "SELECT 
-barang.barang_id, 
-barang.name AS nama_b, 
-barang.jumlah, 
-barang.harga,
-penyedia.nama AS nama_p
-FROM barang
-INNER JOIN penyedia 
-ON barang.penyedia_id = penyedia.penyedia_id
-";
+                        $index = 1;
+
+                        $query = "SELECT 
+                        barang.barang_id, barang.name AS nama_b, barang.jumlah, barang.harga,penyedia.nama AS nama_p
+                        FROM barang 
+                        INNER JOIN penyedia ON barang.penyedia_id = penyedia.penyedia_id";
        
-$exec = mysqli_query($conn, $query);
+                        $exec = mysqli_query($conn, $query);
 
                         while ($post = mysqli_fetch_assoc($exec)) :
                         ?>

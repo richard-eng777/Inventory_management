@@ -50,7 +50,7 @@ include '.includes/toast_notification.php';
                                 </div>
                             </td>
                         </tr>
-                        <!-- modal untuk hapus data kategory -->
+                        <!-- modal untuk hapus data penyedia -->
                         <div class="modal fade" id="deleteCategory_<?= $category['penyedia_id'];
                         ?>" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -78,7 +78,7 @@ include '.includes/toast_notification.php';
                         </div>
                     </div>
 
-                    <!-- Modal untuk update data kategori -->
+                    <!-- Modal untuk update data penyedia -->
                     <div id="editCategory_<?= $category['penyedia_id']; ?>" class="modal fade" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -117,7 +117,7 @@ include '.includes/toast_notification.php';
     </div>
 </div>
 <?php include '.includes/footer.php'; ?>
-<!-- modal untuk tambah data kategori -->
+<!-- modal untuk tambah data penyedia -->
  <div class="modal fade" id="addCategory" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
          <div class="modal-content">

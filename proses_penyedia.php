@@ -63,6 +63,7 @@ if (isset($_POST['update'])) {
             'message' => 'Gagal memperbarui data penyedia: ' . mysqli_error($conn)
         ];
     }
+    
     header('Location: penyedia.php');
     exit();
 }
