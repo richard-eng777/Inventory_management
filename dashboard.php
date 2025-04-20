@@ -13,7 +13,7 @@ include '.includes/toast_notification.php';
                 <div class="table-responsive text-nowrap">
                     <table id="datatable" class="table table-hover">
                         <thead>
-                            <tr class="text-center">
+                            <tr class="text-left">
                                 <th width="50px">#</th>
                                 <th>Nama Barang</th>
                                 <th>Nama Penyedia</th>
