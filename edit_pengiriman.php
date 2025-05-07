@@ -82,38 +82,18 @@ if ($result->num_rows > 0) {
             <div class="card-body">
               <div class="input-group">
                 <input
-                label="jumlah"
-                type="text"
+                
+                type="number"
                 class="form-control"
                 placeholder="Jumlah barang"
                 aria-label="Jumlah barang"
                 id="jumlah_barang"
                 name="jumlah_barang"
                 value="<?php echo $post['jumlah_barang'];?>"
-                readonly
+                
                 required
                 >
-                <button
-                class="btn btn-outline-secondary dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                >
-                <i class="bx bx-chevron-down"></i>
-                </button>
                 
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#" data-value="1">1</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="2">2</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="3">3</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="4">4</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="5">5</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="6">6</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="7">7</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="8">8</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="9">9</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="10">10</a></li>
-                  </ul>
                 </div>
               </div>
             </div>
@@ -125,19 +105,8 @@ if ($result->num_rows > 0) {
     </div>
   </div>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const jumlahInput = document.getElementById('jumlah_barang');
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
-  
-  dropdownItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      jumlahInput.value = this.getAttribute('data-value');
-    });
-  });
-});
-</script>
+
+
 <?php
 include '.includes/footer.php';
 ?>
